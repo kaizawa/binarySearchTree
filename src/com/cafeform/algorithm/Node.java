@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Node {
     static AtomicInteger stepCount = new AtomicInteger();
-    private int value;
+    private Comparable value;
     private Node leftNode;
     private Node rightNode;
     private Node parent;
@@ -18,11 +18,11 @@ public class Node {
         this.parent = parent;
     }
     
-    public Node(int value){
+    public Node(Comparable value){
         this(value, null, null);
     }
     
-    public Node(int value, Node leftNode, Node rightNode){
+    public Node(Comparable value, Node leftNode, Node rightNode){
         this.leftNode = leftNode;
         this.rightNode = rightNode;
         this.value = value;
@@ -36,11 +36,11 @@ public class Node {
         return stepCount.get();
     }
     
-    public Integer getValue(){
+    public Comparable getValue(){
         return value;
     }
     
-    public void add(Integer newValue) throws NodeAlreadyExistException{
+    public void add(Comparable newValue) throws NodeAlreadyExistException{
         add(new Node(newValue));
     }
     
@@ -51,7 +51,7 @@ public class Node {
             throw new NodeAlreadyExistException();
         }
         
-        if(newNode.getValue() < value)
+        if(newNode.getValue().compareTo(value) < 0)
         {
             if(null == leftNode)
             {
@@ -77,14 +77,14 @@ public class Node {
         }
     }
     
-    public Node search(Integer searchValue) throws NoSuchNodeFoundException {
+    public Node search(Comparable searchValue) throws NoSuchNodeFoundException {
         stepCount.incrementAndGet();
         if(searchValue == value)
         {
             return this;
         }
         
-        if(searchValue < value)
+        if(searchValue.compareTo(value) < 0)
         {
             if(null == leftNode)
             {
@@ -192,11 +192,11 @@ public class Node {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 31 * hash + this.value;
-        hash = 31 * hash + Objects.hashCode(this.leftNode);
-        hash = 31 * hash + Objects.hashCode(this.rightNode);
-        hash = 31 * hash + Objects.hashCode(this.parent);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.value);
+        hash = 41 * hash + Objects.hashCode(this.leftNode);
+        hash = 41 * hash + Objects.hashCode(this.rightNode);
+        hash = 41 * hash + Objects.hashCode(this.parent);
         return hash;
     }
 }

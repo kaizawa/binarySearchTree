@@ -5,7 +5,7 @@ package com.cafeform.algorithm;
  * @author kaizawa
  */
 public class NodeUtil {
-    private Integer[][] treeArray;
+    private Comparable[][] treeArray;
     private Node rootNode;
     private int depth;
     private int width;    
@@ -23,12 +23,12 @@ public class NodeUtil {
 
         int currentDepth = 0;
 
-        for(Integer[] line: treeArray){
+        for(Comparable[] line: treeArray){
             printEdge(currentDepth);                        
             StringBuilder lineStr = new StringBuilder();
             int adjust = 0;                        
             int currentColumn = 0;
-            for(Integer value : line){
+            for(Comparable value : line){
                 if(null == value || 0 == value)
                 {
                     if(adjust > 0){
